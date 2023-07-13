@@ -93,7 +93,7 @@ RSpec.describe Team do
 end 
 
   describe "iteration_4" do   
-    xit "#average_cost_of_player" do 
+    it "#average_cost_of_player" do 
       team = Team.new("Dodgers", "Los Angeles")
       player_1 = Player.new("Michael Palledorous" , 1000000, 36)
       player_2 = Player.new("Kenny DeNunez", 500000, 24)

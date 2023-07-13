@@ -16,28 +16,38 @@ class Team
   end
 
   def long_term_players
-    players = []
-    @roster.each do |player|
-      players << player if player.contract_length > 24
+    # players = []
+    # @roster.each do |player|
+    #   players << player if player.contract_length > 24
+    # end
+    # players
+    @roster.find_all do |player|
+      player.contract_length > 24
     end
-    players
   end
 
   def short_term_players
-    players = []
-    @roster.each do |player|
-      players << player if player.contract_length <= 24
+    # players = []
+    # @roster.each do |player|
+    #   players << player if player.contract_length <= 24
+    # end
+    # players
+    @roster.reject do |player|
+      player.contract_length > 24
     end
-    players
   end
 
   def total_value
-    total_team_value = 0
+    # total_team_value = 0
     
-    roster.each do |player|
-      total_team_value += player.total_cost
+    # roster.each do |player|
+    #   total_team_value += player.total_cost
+    # end
+    
+    @roster.sum do |player|
+      # player.monthly_cost * player.contract_length
+      player.total_cost
     end
-    total_team_value
   end
 
   def details
@@ -49,20 +59,33 @@ class Team
   end
 
   def average_cost_of_player
-    average_cost = total_value / player_count
-    string = "$" + average_cost.to_s
-    string
+    # average_cost = total_value / player_count
+    # string = "$" + average_cost.to_s
+    # string
+    average_cost = (total_value/player_count).digits
+    cost = ""
+
+    average_cost.each.with_index do |digits, index|
+      cost = digits.to_s + cost
+
+      if (index % 3 == 2)
+        cost = "," + cost
+      end 
+    end
+    cost = "$" + cost
   end
 
   def players_by_last_name
     last_names = ""
     #just realized I could have probably used sort_by enumerable to shorten
-    @roster.each do |player|
-      last_names << "#{player.last_name}, "
-    end
-    string = last_names.chomp(", ")
-    first_sort = string.split(" ")
-    sorted = first_sort.sort
-    last_names = sorted.join(" ")
+    # @roster.each do |player|
+    #   last_names << "#{player.last_name}, "
+    # end
+    # string = last_names.chomp(", ")
+    # first_sort = string.split(" ")
+    # sorted = first_sort.sort
+    # last_names = sorted.join(" ")
+
+    @roster.map {|player| player.last_name }.sort.join(", ")
   end
 end
