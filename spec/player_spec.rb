@@ -16,7 +16,7 @@ RSpec.describe Player do
 
   it 'has a last name' do
     player = Player.new("Michael Palledorous" , 1000000, 36)
-
+    # require 'pry';binding.pry
     expect(player.last_name).to eq("Palledorous")
   end
 
