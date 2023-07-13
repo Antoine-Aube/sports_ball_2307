@@ -73,11 +73,27 @@ RSpec.describe Team do
       team.add_player(player_2)
       team.add_player(player_3)
       team.add_player(player_4)
-    
+      
       expect(team.total_value).to eq(85200000)    
     end
-
+    
     it "#details" do 
+    team = Team.new("Dodgers", "Los Angeles")
+    player_1 = Player.new("Michael Palledorous" , 1000000, 36)
+    player_2 = Player.new("Kenny DeNunez", 500000, 24)
+    player_3 = Player.new("Alan McClennan", 750000, 48)
+    player_4 = Player.new("Hamilton Porter", 100000, 12)
+    team.add_player(player_1)
+    team.add_player(player_2)
+    team.add_player(player_3)
+    team.add_player(player_4)
+    # require 'pry';binding.pry
+    expect(team.details).to eq({"total_value" => 85200000, "player_count" => 4})
+  end   
+end 
+
+  describe "iteration_4" do   
+    xit "#average_cost_of_player" do 
       team = Team.new("Dodgers", "Los Angeles")
       player_1 = Player.new("Michael Palledorous" , 1000000, 36)
       player_2 = Player.new("Kenny DeNunez", 500000, 24)
@@ -87,8 +103,21 @@ RSpec.describe Team do
       team.add_player(player_2)
       team.add_player(player_3)
       team.add_player(player_4)
-  # require 'pry';binding.pry
-      expect(team.details).to eq({"total_value" => 85200000, "player_count" => 4})
-    end   
-  end 
+      
+      expect(team.average_cost_of_player).to eq("$21,300,000")
+    end
+    it "players_by_last_name" do 
+      team = Team.new("Dodgers", "Los Angeles")
+      player_1 = Player.new("Michael Palledorous" , 1000000, 36)
+      player_2 = Player.new("Kenny DeNunez", 500000, 24)
+      player_3 = Player.new("Alan McClennan", 750000, 48)
+      player_4 = Player.new("Hamilton Porter", 100000, 12)
+      team.add_player(player_1)
+      team.add_player(player_2)
+      team.add_player(player_3)
+      team.add_player(player_4)
+      # require 'pry';binding.pry
+      expect(team.players_by_last_name).to eq("DeNunez, McClennan, Palledorous, Porter")
+    end
+  end
 end

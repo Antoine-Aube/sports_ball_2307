@@ -47,4 +47,22 @@ class Team
     }
     details
   end
+
+  def average_cost_of_player
+    average_cost = total_value / player_count
+    string = "$" + average_cost.to_s
+    string
+  end
+
+  def players_by_last_name
+    last_names = ""
+    #just realized I could have probably used sort_by enumerable to shorten
+    @roster.each do |player|
+      last_names << "#{player.last_name}, "
+    end
+    string = last_names.chomp(", ")
+    first_sort = string.split(" ")
+    sorted = first_sort.sort
+    last_names = sorted.join(" ")
+  end
 end
